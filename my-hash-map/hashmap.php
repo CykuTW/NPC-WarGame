@@ -2,15 +2,15 @@
 
 class MyHashMap {
 
-    const MAX_COLLISION_SIZE = 255;
+    const MAX_COLLISION_SIZE = 5;
     const MAX_SIZE = 65536;
 
-    private $array;
+    private $map;
     
     function __construct() {
-        $this->array = new SplFixedArray(self::MAX_SIZE);
-        /*for ($i = 0; $i < $this->array->getSize(); $i++)
-            $this->array[$i] = new SplFixedArray(self::MAX_COLLISION_SIZE);*/
+        $this->map = new SplFixedArray(self::MAX_SIZE);
+        /*for ($i = 0; $i < $this->map->getSize(); $i++)
+            $this->map[$i] = new SplFixedArray(self::MAX_COLLISION_SIZE);*/
     }
 
     public function get($key) {
@@ -18,7 +18,7 @@ class MyHashMap {
             return NULL;
         
         $hash = self::djbx33a($key);
-        $current = $this->array[$hash];
+        $current = $this->map[$hash];
         $result = NULL;
         while (!is_null($current)) {
             if ($current->key === $key)
@@ -33,17 +33,17 @@ class MyHashMap {
             return;
 
         $hash = self::djbx33a($key);
-        if (is_null($this->array[$hash]))
-            $this->array[$hash] = self::new_node($key, $value);
+        if (is_null($this->map[$hash]))
+            $this->map[$hash] = self::new_node($key, $value);
         else {
-            $current = $this->array[$hash];
+            $current = $this->map[$hash];
             $counter = 1;
             while ($current->key !== $key && !is_null($current->next)) {
                 $current = $current->next;
                 $counter++;
             }
-            
-            if ($counter > self::MAX_SIZE)
+
+            if ($counter >= self::MAX_COLLISION_SIZE)
                 throw new OverflowException("Oops! MyHashMap was full :(");
 
             if ($current->key === $key)
@@ -53,15 +53,31 @@ class MyHashMap {
         }
     }
 
+    public function dump() {
+        $result = '';
+        for ($i = 0; $i < self::MAX_SIZE; $i++) {
+            $current = $this->map[$i];
+            if (!is_null($current)) {
+                $result .= (string) $i;
+                while (!is_null($current)) {
+                    $result .= sprintf(" -> [%s]=%s", $current->key, var_export($current->value, true));
+                    $current = $current->next;
+                }
+                $result .= "\n";
+            }
+        }
+        return $result;
+    }
+
     public function remove($key) {
         if (!self::is_valid_key($key))
             return;
         
         $hash = self::djbx33a($key);
-        $current = $this->array[$hash];
+        $current = $this->map[$hash];
         if (!is_null($current) && $current->key === $key) {
             $temp = $current;
-            $this->array[$hash] = $current->next;
+            $this->map[$hash] = $current->next;
             unset($temp);
         } else {
             while (!is_null($current->next)) {
@@ -102,12 +118,5 @@ class MyHashMap {
         return $hash;
     }
 }
-
-$map = new MyHashMap();
-$map->put('test', 123);
-$map->put('asd', 456);
-$map->remove('test');
-var_dump($map->get('test'));
-var_dump($map);
 
 ?>
