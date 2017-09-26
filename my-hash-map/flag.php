@@ -1,5 +1,5 @@
 <?php
 
-$flag = 'FLAG';
+$flag = 'NPC{...}';
 
 ?>
