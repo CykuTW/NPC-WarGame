@@ -35,7 +35,7 @@ if (is_string($_POST['data'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container" style="margin-top: 5rem;">
+    <div class="container" style="margin-top: 3rem;">
         <div class="row justify-content-md-center">
             <div class="col-md-8 col-md-auto">
                 <div class="card">
