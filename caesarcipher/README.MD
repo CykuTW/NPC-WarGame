@@ -1,0 +1,1 @@
+1. set up flag in index.php
