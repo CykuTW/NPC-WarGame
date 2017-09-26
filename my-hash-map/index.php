@@ -42,7 +42,7 @@ if (is_string($_POST['data'])) {
                     <div class="card-body">
                         <h3 class="card-title">My HashMap</h3>
                         <div class="card-text">
-                            <p>Hello, I'm a student and I just completed the Data Structure Curse at my school. So I made this to understand HashMap.</p>
+                            <p>Hello, I'm a student and I just completed the Data Structure Course at my school. So I made this to understand HashMap.</p>
                             <p>Hope you like it, and please tell my if you found any bugs.</p>
                             <hr />
                             <form method="POST">
