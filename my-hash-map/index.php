@@ -12,7 +12,7 @@ if (is_string($_POST['data'])) {
         $map = new MyHashMap();
         try {
             foreach ($json as $key => $value)
-                $map->put($key, $value);
+                $map->put((string) $key, $value);
             $result = $map->dump();
         } catch (RuntimeException $e) {
             $result = "Oops, someting is wrong.\nPlease contact Website Manager with this code: " . $flag;
