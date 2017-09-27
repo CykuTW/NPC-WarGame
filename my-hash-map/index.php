@@ -59,7 +59,7 @@ if (is_string($_POST['data'])) {
                             <?php if (is_string($result)): ?>
                                 <h5>HashMap Result:</h5>
                                 <pre><?=htmlspecialchars($result) ?></pre>
-                            <?php endif ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
