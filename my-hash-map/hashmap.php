@@ -107,7 +107,7 @@ class MyHashMap {
     }
 
     private static function is_valid_key($key) {
-        return true;
+        return is_string($key);
     }
 
     private static function djbx33a($string) {
